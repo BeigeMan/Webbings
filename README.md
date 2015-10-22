@@ -1,4 +1,6 @@
-  Swarm-based mating of insects, such as midges, typically involves
+# 2D Illustration of Swarm-based Insect Mating
+
+ Swarm-based mating of insects, such as midges, typically involves
   groups, predominantly of males, centred over some marker in the
   terrain. Swarming increases the chances of a successful encounter with
   patrolling females that are attracted to the swarm. They enter it
