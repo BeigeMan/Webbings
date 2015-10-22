@@ -1,4 +1,4 @@
-# WebbingsSwarm-based mating of insects, such as midges, typically involves
+  Swarm-based mating of insects, such as midges, typically involves
   groups, predominantly of males, centred over some marker in the
   terrain. Swarming increases the chances of a successful encounter with
   patrolling females that are attracted to the swarm. They enter it
@@ -13,8 +13,8 @@
   adjustable linear law for the attraction to a swarm marker. Male/male
   attraction, which is thought not to be a big factor in the swarm, is
   here turned off by default, but can be added as an adjustable
-  inverse-square law.  (Mob clustering will then occur in the swarm,
-  beyond a critical strength of attraction.) Self-propulsion is
+  inverse-square law.  (Above a critical strength of this attraction, 
+  mob clustering will occur in the swarm.) Self-propulsion is
   accounted for by setting a minimum velocity in the swarm. The maximum
   velocity is adjustable. Ageing is accumulated individually for the
   particles from the number of flight maneuvers made: matings, take-offs
