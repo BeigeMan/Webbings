@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+  <head>
+ 
+        <meta charset='UTF-8'>
+        <meta name="description" content="Simple 2D Illustration of Swarming and Mating Midges" name="title">
+        <title>Swarming Midges</title>
+        <meta name="author" content="Colin Hurd">
+  <body>
+        <canvas id='midgespace' >
+        Your browser does not support Canvas</canvas>
+        <canvas id = 'bar' height='30'></canvas>
+        <canvas id = 'defbtn' width = '70' height = '30'></canvas>
+        <canvas id = 'settings' width = '450' height = '780'></canvas>
+        <canvas id = 'setbtn' width = '70' height = '30'></canvas>
+       </canvas>
+       
+
+      <input autocomplete='off' type='range' id='slider1' name='slider1'  min='2' max='50' value= '40'> 
+      <input autocomplete= 'off' type='range' id='slider1'  name='slider1' min='2' max='50' value= '40' step='1' oninput='showValue(this.value,0)'> 
+      <output name='output1' id='output1' for='slider1'>40</output>
+      
+      <input  autocomplete= 'off' type='range' id='slider2' name='slider2' min='0' max='100' value= '100'> 
+      <input  autocomplete= 'off' type='range' id='slider2' name='slider2' min='0' max='100' value= '100' step='1' oninput='showValue(this.value,1)'> 
+      <output name='output2' id='output2' for='slider2'>100</output> 
+      
+      <input  autocomplete= 'off' type='range' id='slider3' name='slider3' min='0' max='10' value= '4'> 
+      <input  autocomplete= 'off' type='range' id='slider3' name='slider3' min='0' max='10' value= '4' step='1' oninput='showValue(this.value,2)'> 
+      <output name='output3' id='output3' for='slider3'>4</output>
+      
+      <input  autocomplete= 'off' type='range' id='slider4' name='slider4' min='4' max='40' value= '10'> 
+      <input  autocomplete= 'off' type='range' id='slider4' name='slider4' min='4' max='40' value= '10' step='1' oninput='showValue(this.value,3)'> 
+      <output name='output4' id='output4' for='slider4'>10</output> 
+       
+      <input  autocomplete= 'off' type='range' id='slider5' name='slider5' min='0' max='90' value= '0'> 
+      <input  autocomplete= 'off' type='range' id='slider5' name='slider6' min='0' max='90' value= '0' step='1' oninput='showValue(this.value,4)'> 
+      <output name='output5' id='output5' for='slider5'>0</output> 
+      
+      <input  autocomplete= 'off' type='range' id='slider6' name='slider6' min='1' max='20' value= '10'> 
+      <input  autocomplete= 'off' type='range' id='slider6' name='slider6' min='1' max='20' value= '10' step='1' oninput='showValue(this.value,5)'> 
+      <output name='output6' id='output6' for='slider6'>10</output> 
+      
+      <input  autocomplete= 'off' type='range' id='slider7' name='slider7' min='0' max='40' value= '10'> 
+      <input  autocomplete= 'off' type='range' id='slider7' name='slider7' min='0' max='40' value= '10' step='2' oninput='showValue(this.value,6)'> 
+      <output name='output7' id='output7' for='slider7'>10</output> 
+      
+      <input  autocomplete= 'off' type='range' id='slider8' name='slider8' min='0' max='40' value= '20'> 
+      <input  autocomplete= 'off' type='range' id='slider8' name='slider8' min='0' max='40' value= '20' step='1' oninput='showValue(this.value,7)'> 
+      <output name='output8' id='output8' for='slider8'>20</output> 
+
+      <input  autocomplete= 'off' type='range' id='slider9' name='slider9' min='1' max='60' value= '60'> 
+      <input  autocomplete= 'off' type='range' id='slider9' name='slider9' min='1' max='60' value= '60' step='1' oninput='showValue(this.value,8)'> 
+      <output name='output9' id='output9' for='slider9'>60</output> 
+
+ </body>
+	 
+<style>
+       html {
+             height: 100%;
+             }
+     
+       body { 
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color:#b2b2b2;
+        }
+       #midgespace {
+            top: 42px;
+            margin: 5px;
+            outline: 0;
+            padding: 0;
+            border: 0;
+            border-style: solid;
+            border-color: #fff;
+            border-width: 2px;
+            background-color: #222;
+            position: absolute;
+            overflow: hidden;
+            z-index: 1;
+        }
+       #bar { 
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background-image: linear-gradient(to right, #669999, white, #669999);
+            border-radius: 5px;
+            border-style: solid;
+            border-color: #fff;
+            border-width: 2px;
+            position: absolute;
+            top: 5px;
+            overflow: hidden;
+			left: 165px;
+       }
+       #defbtn{
+            margin: 0;
+            border-radius: 5px;
+            background-image:radial-gradient(white,#669999);
+            border-style: solid;
+            border-color: #fff;
+            border-width: 2px;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            overflow: hidden;
+       }
+       #setbtn{
+            margin: 0;
+            border-radius: 5px;
+            background-image:radial-gradient(white,#669999);
+            border-style: solid;
+            border-color: #fff;
+            border-width: 2px;
+            position: absolute;
+            top: 5px;
+            left: 85px;
+            overflow: hidden;
+       }
+       #settings{
+            top:70px;
+            left:20px;
+            margin: 0;
+            outline: 0;
+            padding: 0;
+            opacity: .5;
+            background-color:#b2b2b2;
+            border-radius: 5px;
+            border-style: solid;
+            border-color: #fff;
+            border-width: 2px;
+            position: absolute;
+            overflow: hidden;
+       }
+       #slider1{
+           position:absolute;
+           top: 130px;
+           left: 270px;
+       }
+      #output1{    
+           position:absolute;
+           top: 132px;
+           left: 415px;
+           color: #fff;
+      }
+      #slider2{
+           position:absolute;
+           top: 160px;
+           left: 270px;
+       }
+      #output2{    
+           position:absolute;
+           top: 162px;
+           left: 415px;
+           color: #fff;
+      }
+       #slider3{
+           position:absolute;
+           top: 190px;
+           left: 270px;
+       }
+      #output3{    
+           position:absolute;
+           top: 192px;
+           left: 415px;
+           color: #fff;
+      }
+       #slider4{
+           position:absolute;
+           top: 220px;
+           left: 270px;
+       }
+      #output4{    
+           position:absolute;
+           top: 224px;
+           left: 415px;
+           color: #fff;
+      }
+      #slider5{
+           position:absolute;
+           top: 250px;
+           left: 270px;
+       }
+      #output5{    
+           position:absolute;
+           top: 252px;
+           left: 415px;
+           color: #fff;
+      }
+      #slider6{
+           position:absolute;
+           top: 280px;
+           left: 270px;
+       }
+      #output6{    
+           position:absolute;
+           top: 282px;
+           left: 415px;
+           color: #fff;
+      }
+      #slider7{
+           position:absolute;
+           top: 310px;
+           left: 270px;
+       }
+      #output7{    
+           position:absolute;
+           top: 312px;
+           left: 415px;
+           color: #fff;
+      }
+      #slider8{
+           position:absolute;
+           top: 340px;
+           left: 270px;
+       }
+      #output8{    
+           position:absolute;
+           top: 342px;
+           left: 415px;
+           color: #fff;
+      }
+      #slider9{
+           position:absolute;
+           top: 370px;
+           left: 270px;
+       }
+      #output9{    
+           position:absolute;
+           top: 372px;
+           left: 415px;
+           color: #fff;
+      }
+      
+</style>
+ 
+   <script>
+            //Settings
+                
+                   var cases =[swarmMale,perMale,spdLimit,minProx,islFactor1,islFactor2,tgtConst,lifeTime,frameRate];
+            
+             // Swarm 
+                   var lifeSpan=2000;        //Maximum male lifespan
+                   var dead=0;               //Number of expired lifeSpans
+                   var swarm = false;        //Swarming? y/n
+                   var particles=[];         //Array: length=amount 
+                   var male=40, female=0;    //Initial numbers for sexType
+                   var amount = male+female; //Total number in the swarm     
+                   var marker_x = 700;       //x-pos of swarm marker in 'bar'
+                   var marker_const=1000;    //Reduce this to increase attraction to swarm marker
+                   var sexType =[];          //Boolean male=true
+                   var ages = [];            //Accumulated age of each particle
+                   var percent_male=100;     //Initial percentage of males in swarm
+                   var factor1=1;            //Initial inverse-square scaling factor male/male
+                   var factor2=10;            //Initial inverse-square scaling factor male/female
+                   var min_prox = 10;        //Range 4->40px. 
+                   var initial_speed = 20;   //Initial swarm speed
+                   var speed_toplimit = 4;   //Swarm speed top limit. 
+                   var speed_botlimit=3;     //Swarm speed bottom limit set to account for self propulsion
+                   var latest_marker=1000;   //Current inputted target_constant
+                   var vec2;                 //In-flight mating vector
+                   
+           // Frame-rate        
+                   var fps = 60;             //Chosen rAF frame rate 
+                   var now;                  //Time now
+                   var then = Date.now();    //Time before
+                   var interval = 1000/fps;  //Time between each frame request
+                   var delta;                //Time elapsed since last loop
+                   
+          //Display
+                    var vWall = 80;           //Top and sides walls set this #px offscreen
+                    var wall_damp = 1;        //Wall damping coefficient. 1=elastic
+                    var x_last=0;             //Last x-cord of swarm marker
+                    var panel = false;        //Mouseover midgespace canvas
+                    var setts = false;        //Mouseover settings canvas
+                    
+                      
+// ---------------DYNAMIC SCREEN SIZE-----------------------------
+ (function(){ 
+
+            var canvas = document.getElementById('midgespace');
+            var context = canvas.getContext('2d');
+            var canvas1 = document.getElementById('bar');
+            var context1 = canvas1.getContext('2d');
+			var canvas2 = document.getElementById('defbtn');
+            var context2 = canvas2.getContext('2d');
+            var canvas3 = document.getElementById('settings');
+            var context3 = canvas3.getContext('2d');
+            var canvas4 = document.getElementById('setbtn');
+            var context4 = canvas4.getContext('2d');
+            
+       // Resize the canvases to fill browser window dynamically
+            window.addEventListener('resize', resizeCanvas, false); 
+         
+       function resizeCanvas() {
+          midgespace.width = window.innerWidth-18;
+		  midgespace.height = window.innerHeight-60;
+          bar.width = window.innerWidth-180;
+          drawStuff();  
+         }
+       resizeCanvas();
+             
+       function drawStuff() {    
+         context.fillStyle='#222';  //midgespace background
+         context.fillRect(0,0,bar.width,midgespace.height);
+         context2.font='13px sans-serif';
+         context2.fillText('DEFAULTS', 2,canvas1.height/2+5);
+         context4.font='13px sans-serif';
+         context4.fillText('SETTINGS', 3,canvas1.height/2+5);
+         } 
+       })();  
+// --------------------------------------------------------- 
+
+         
+      //'Vector' and 'drawandUpdate' are taken from  https://flattr.com/thing/55739/html5-canvas-and-the-flying-dots 
+               
+  var Vector = function(x, y) {
+            this.x = x;
+            this.y = y;
+            this.sub = function(other) {
+                return new Vector(this.x - other.x, this.y - other.y);
+            }
+            this.isub = function(other) {
+                this.x -= other.x;
+                this.y -= other.y;
+            }
+            this.iadd = function(other) {
+                this.x += other.x;
+                this.y += other.y;
+            }
+            this.length = function() {
+                return Math.sqrt(this.x * this.x + this.y * this.y);
+            }
+            this.idiv = function(scalar) {
+                this.x /= scalar;
+                this.y /= scalar;
+            }
+            this.zero = function() {
+                this.x = 0;
+                this.y = 0;
+            }
+            this.validate = function() {
+                if (isNaN(this.x + this.y)) {
+                    this.x = 0;
+                    this.y = 0;
+                }
+            }
+        }
+		
+            var canvas = document.getElementById('midgespace');
+            var context = canvas.getContext('2d');
+            canvas.addEventListener('click', doAddFemale, false);
+            canvas.addEventListener('mouseover', doPanel, false);
+            canvas.addEventListener('mouseout', doPanel, false);
+            
+            var canvas1 = document.getElementById('bar');
+            var context1 = canvas1.getContext('2d');
+            canvas1.addEventListener('mousedown', doMouseDown, false);
+            canvas1.addEventListener('mouseover', doMouseOverBar, false);
+            canvas1.addEventListener('mouseout', doMouseOutBar, false);
+            
+			var canvas2 = document.getElementById('defbtn');
+            var context2 = canvas2.getContext('2d');
+			canvas2.addEventListener('mouseover', doMouseOverDefbtn, false);
+            canvas2.addEventListener('click', doDefBtnClick, false);
+            canvas2.addEventListener('mouseout', doMouseOutDefbtn, false);
+            
+            var canvas3= document.getElementById('settings');
+            var context3 = canvas3.getContext('2d');
+		
+			var canvas4 = document.getElementById('setbtn');
+            var context4 = canvas4.getContext('2d');
+            canvas4.addEventListener('mouseover', doMouseOverSetbtn, false);
+            canvas4.addEventListener('click', doSetBtnClick, false);
+            canvas4.addEventListener('mouseout', doMouseOutSetbtn, false);
+            
+
+             
+       function showValue(newValue,item) {               //Switch between sliders
+              if (cases[item]) {cases[item](newValue);}
+	         }
+	         
+	   function lifeTime(newValue) {
+	         lifeSpan = document.getElementById('output8').innerHTML=newValue;
+	         lifeSpan*=100;
+	         }
+	         
+	   function frameRate(newValue) {
+	         fps = document.getElementById('output9').innerHTML=newValue;
+	         interval=1000/fps;
+	         }
+	         
+	   function minProx(newValue) {
+	         min_prox = document.getElementById('output4').innerHTML=newValue;
+	         }
+	         
+	   function islFactor1(newValue) {
+	         factor1 = document.getElementById('output5').innerHTML=newValue;
+	         }
+	         
+	   function islFactor2(newValue) {
+	         factor2 = document.getElementById('output6').innerHTML=newValue;
+	         factor2++;
+	         }
+	         
+	   function spdLimit(newValue) {
+	         speed_toplimit= document.getElementById('output3').innerHTML=newValue;
+	         }
+	         
+	   function tgtConst(newValue) {
+	         latest_marker=(document.getElementById('output7').innerHTML=newValue);
+	         latest_marker=1e4/latest_marker++;
+	         }  
+	         
+	   function perMale(newValue) { 
+	         percent_male = document.getElementById('output2').innerHTML=newValue;
+	         var dd =parseInt(percent_male*amount/100);                             //Current number males required
+	            for (var i = 0; i<amount; i++) 
+	             {sexType[i]=false;ages[i]=Math.floor(Math.random()*lifeSpan/2)+1;} //Random initial ages
+	            for (var i = 0; i<dd; i++) {sexType[i]=true;}                       //Update to the new male percent 
+	               amount=particles.length;male=dd;female=amount-male;
+	         if(female<0){female=0;};messg2();
+	         }
+	         
+	   function swarmMale(newValue) {
+            var  new_amount=0;
+	          new_amount = parseInt(document.getElementById('output1').innerHTML=newValue);
+	          var diff = amount-new_amount;
+	          if (diff==0) {return;
+	                }
+	             else if (diff>0)                //subtract diff elements from [particles], [sexType] and [ages]
+	               {  
+	               particles.splice(1,diff); sexType.splice(1,diff); ages.splice(1,diff); 
+	               }
+	            else
+	              { 
+	             diff=-diff; 
+	              for (var i = 0; i < diff; i++) {//add diff elements to [particles], [sexType] and [ages]
+                  particles.push ( new Particle(canvas,0,0)); 
+                  sexType.push(true); ages.push(0); 
+                  }
+	            }
+	          amount=new_amount;                                       
+	          var dd =parseInt(percent_male*amount/100);               //Current number males required
+	          for (var i = 0; i<amount; i++) {sexType[i]=false;}       //Clear sexType[] to all female
+	          for (var i = 0; i<dd; i++) {sexType[i]=true;}            //Update to the new male percent 
+	           male=dd;female=amount-dd;
+	          if(female<0){female=0};messg2();                         //Allow for rounding errors
+	        } 
+	         
+	   function doMouseDown(ev) {
+           marker_x=ev.pageX-canvas1.offsetLeft;
+           if (marker_x>bar.width-65) {marker_x =bar.width - 65};
+           context1.clearRect(0,0,bar.width,30);
+           var grd=context1.createLinearGradient(0,0,bar.width,0);
+           grd.addColorStop(0,'#669999');
+           grd.addColorStop(0.5,'#ffffff');
+           grd.addColorStop(1,'#669999');
+           context1.fillStyle=grd;
+           context1.fillRect(0,0,bar.width,30);
+           context1.fillStyle='rgb(0,0,0)';
+           swarm=true;
+           
+              if (marker_x >= x_last && marker_x <= x_last+60)        // Delete swarm marker
+                 {context1.fillRect(x_last,5,60,15); 
+                 context1.fillStyle=grd;context1.fillRect(0,0,bar.width,30);
+                 x_last=100; swarm=false;return; 
+                  }             
+             marker_const = latest_marker;  
+             messg3();messg1();x_last=marker_x; 
+            } 
+            
+        function doPanel() {panel=!panel;}
+          
+        function doAddFemale(ev) {
+            var cX = ev.clientX-5;
+            var cY = ev.clientY-47;
+            setupParticles(cX,cY);
+            }
+            
+        function doMouseOverSetbtn(ev) {
+            context4.clearRect(0,0,70,30);
+            context4.fillStyle='rgb(255,0,0)';
+            context4.font='13px sans-serif';
+            context4.fillText('SETTINGS', 3,canvas1.height/2+5);
+            }
+           
+         function doMouseOverDefbtn(ev) {
+            context2.clearRect(0,0,70,30);
+            context2.fillStyle='rgb(255,0,0)';
+            context2.font='13px sans-serif';
+            context2.fillText('DEFAULTS', 3,canvas1.height/2+5);
+            }
+            
+         function doMouseOverBar(ev) {
+            if(swarm) {return;}
+            context1.fillStyle='rgb(0,0,0)';
+            context1.font='13px sans-serif';
+            context1.fillText('CLICK IN THIS SPACE TO PLACE A SWARM MARKER', 30,canvas1.height/2+5);
+            }
+            
+         function doMouseOutDefbtn(ev) {
+            context2.clearRect(0,0,70,30);
+            context2.fillStyle='rgb(0,0,0)';
+            context2.font='13px sans-serif';
+            context2.fillText('DEFAULTS', 2,canvas1.height/2+5);
+            }
+            
+         function doMouseOutSetbtn(ev) {
+            context4.clearRect(0,0,70,30);
+            context4.fillStyle='rgb(0,0,0)';
+            context4.font='13px sans-serif';
+            context4.fillText('SETTINGS', 3,canvas1.height/2+5);
+            }
+            
+         function doMouseOutBar(ev) { 
+           if(swarm) {return;}
+            messg2();
+            }
+            
+         function doDefBtnClick(ev) {
+            window.location.reload();
+            } 
+            
+         function doSetBtnClick(ev) {           //Ternary toggle
+            midgespace.style.zIndex = (midgespace.style.zIndex != '0' ? '0' : '1');
+            
+              if (midgespace.style.zIndex == '0') {
+                  context3.fillStyle = 'rgba(0,0,0,1)';
+                  context3.rect(10,20,430,310);
+                  context3.stroke();
+                  context3.font='16px sans-serif';
+                  context3.fillText('ADJUSTABLE PARAMETERS',103,45); 
+                  context3.font='12px sans-serif';
+                  context3.fillText('INITIAL NUMBER OF PARTICLES',50,73);
+                  context3.fillText("INITIAL % 'MALE' PARTICLES",70,103);
+                  context3.fillText('MIN. PROXIMITY FOR MATING (px)',37,163);
+                  context3.fillText('MALE/MALE InvSqLaw ATTRACTION',30,195);
+                  context3.fillText('MALE/FEMALE InvSqLaw ATTRACTION',15,225);
+                  context3.fillText("PARTICLES' UPPER SPEED LIMIT",44,133);
+                  context3.fillText('MALE/MARKER linear law ATTRACTION',16,255);
+                  context3.fillText('DISPLAY (fps)',160,312);
+                  context3.fillText("MAX. PARTICLE LIFESPAN",84,282);
+                  context3.font='13px sans-serif';
+                  context3.fillText('  Swarm-based mating of flying insects, such as midges, typically invol-',15,350); 
+                  context3.fillText('ves groups, predominantly of males, centred over some marker in the ',15,370);
+                  context3.fillText('terrain. Swarming increases the chances of a successful encounter with ',15,390);
+                  context3.fillText('patrolling females attracted by the swarm. They enter it briefly, mate in',15,410); 
+                  context3.fillText('flight, and eventually drop from the swarm to lay eggs elsewhere. During',15,430); 
+                  context3.fillText("this phase, the insects' lifetimes are limited by their internal resources.",15,450); 
+                  context3.fillText('  This code gives a plausible illustration of these features using basic 2D',15,475);
+                  context3.fillText('physics of interacting, identical particles. The male/female attraction is an',15,495); 
+                  context3.fillText('inverse-square law, reflecting the acoustic communication used in nature.',15,515); 
+                  context3.fillText('We use a linear law for the attraction to a swarm marker. Male/male ',15,535); 
+                  context3.fillText('attraction, thought not to be a big factor in the swarm, is here turned',15,555); 
+                  context3.fillText('turned off by default, but can be added as an inv-sq-law. (Beyond a criti-',15,575); 
+                  context3.fillText('cal transition, mob clustering will then occur.) Self-propulsion is accounted',15,595); 
+                  context3.fillText('for by setting a minimum speed in the swarm; the maximum is adjustable.',15,615);
+                  context3.fillText('Aging is accumulated individually from the number of flight maneuvers',15,635);
+                  context3.fillText('made: matings, take offs, and close encounters. The details are fixed but',15,655); 
+                  context3.fillText('the maximum lifetime is adjustable. Mated or expired females drop from',15,675);
+                  context3.fillText('the swarm and from the scene; expired males collect as debris.',15,695);
+                  context3.fillText('  The code is fully self-contained HTML5/CSS3 JS, compatible with up-to-',15,720);
+                  context3.fillText('date browsers. Chrome works best. Performance depends on hardware.',15,740);
+                  context3.fillText('Toggle SETTINGS to hide this panel',110,770);  
+                   }  
+            }
+             
+         function messg(){    
+            context1.fillStyle='rgb(0,0,0)'; 
+            context1.font='13px sans-serif';
+            context1.fillText('CLICK IN THIS SPACE TO PLACE A SWARM MARKER', 30,canvas1.height/2+5);
+            }     
+        
+        function messg1(){ 
+            context1.fillStyle='rgb(0,0,0)'; 
+            context1.font='14px sans-serif';
+            context1.fillText('CLICK ON GOLD TO REMOVE', 30,canvas1.height/2+5);
+            } 
+            
+        function messg2(){ 
+           context1.clearRect(0,0,bar.width,30);
+           var grd=context1.createLinearGradient(0,0,bar.width,0);
+           grd.addColorStop(0,'#669999');
+           grd.addColorStop(0.5,'#ffffff');
+           grd.addColorStop(1,'#669999');
+           context1.fillStyle=grd;
+           context1.fillRect(0,0,bar.width,30);
+            }
+            
+       function messg3(){ 
+           var grdt=context1.createLinearGradient(marker_x,9,marker_x,19);
+           grdt.addColorStop(0,'#FFE87C');
+           grdt.addColorStop(1,'grey');
+           context1.fillStyle=grdt;
+           context1.fillRect(marker_x,5,60,15);
+           context1.fillStyle='rgb(0,0,0)';
+            } 
+            
+            /* To avoid intrusive edge effects at sides and top
+               of the canvas, we constrain the particles inside
+               elastic walls that are set a distance vWall px 
+               off-screen, except the bottom of the window. */
+               
+         var Particle = function(canvas,cX,cY) {
+             if (cX==0) {
+                  this.accel = new Vector(0, 0);
+                  this.position = new Vector(Math.random() * canvas.width, Math.random() * canvas.height);
+                  this.vel = new Vector(Math.random() * initial_speed - initial_speed * 0.5, Math.random() * initial_speed - initial_speed * 0.5)
+                  }
+                  else {
+                  this.accel = new Vector(0, 0);
+                  this.position = new Vector(cX,cY);
+                  this.vel = new Vector(0,0)
+                  }
+            this.step = function(i) {
+                  this.accel.validate();
+                  this.vel.iadd(this.accel);
+                  speed = this.vel.length();
+                  
+             if (speed>speed_toplimit) {                      //Speed trap set
+                  this.vel.idiv(speed/speed_toplimit);
+                 }
+            if (speed<speed_botlimit && this.position.y<=canvas.height-3 && ages[i] !== true) {  
+                  this.vel.idiv(speed/speed_botlimit);  //Self propulsion applied
+                 }  
+                
+                this.position.iadd(this.vel);    //Instead of introducing timing, use offscreen
+                this.accel.zero();               //wall contacts to increment a particle's age
+                if (this.position.x < -vWall) {
+                    this.position.x = 0;
+                    this.vel.x *= -wall_damp;
+                    ages[i] +=5;
+                } else if (this.position.x > canvas.width + vWall) {
+                    this.position.x = canvas.width;
+                    this.vel.x *= -wall_damp;
+                    ages[i] +=5;
+                }
+                if (this.position.y < -vWall/2) {
+                    this.position.y = 0;
+                    this.vel.y *= -wall_damp;
+                    ages[i] +=5
+                } else if (this.position.y >= canvas.height) {
+                    this.position.y = canvas.height;
+                    this.vel.y = 0;
+                    this.vel.x = 0;
+               if(ages[i] >lifeSpan || ages[i] ==true) {return;}
+                    ages[i] +=10;                         //Take off from ground so bigger age increase
+               }
+            
+            }
+             
+            this.draw = function(context) {
+                context.beginPath();
+                context.arc(this.position.x, this.position.y, 2.5, 0, Math.PI * 2, false);
+                context.fill(); 
+           }
+        }
+        
+          function setupParticles(cX,cY) {   
+              if (cX==0) {                                             //Set initial population of midgespace
+                for (var i=0;i< amount; i++) {
+                  particles.push(new Particle(canvas,0,0));            //Random initial age
+                    sexType[i]=false;ages[i]=Math.floor(Math.random()*lifeSpan/2)+1;}
+                  for (var i=0;i<Math.ceil(percent_male*amount/100); i++)
+                    {sexType[i]=true;}                                 //Update to male percent
+             }
+             else                                                 
+             {
+               amount=particles.push ( new Particle(canvas,cX,cY));  //Mouse clicked so add a female.
+               sexType.push(false);                                  //Designate as female
+               ages.push(Math.floor(Math.random()*lifeSpan/4)+1);    //Initial random age
+             if (swarm) {context1.fillText('CLICK ON GOLD TO REMOVE', 30,canvas1.height/2+5);}
+             }
+              male=sexType.filter(function(value){return value ==true;}).length;
+              female=amount-male; messg2(); 
+              drawandUpdate(cX);
+       }
+    
+        function drawandUpdate(cX) {
+           requestAnimationFrame(drawandUpdate); 
+           //Throttle rAF to get specified fps
+                now = Date.now();     
+                delta = now - then;   
+              if (delta > interval){       
+                then = now -(delta % interval);
+                
+           //Show current swarm population  
+                 context.fillStyle='rgba(128,128,128,0.3)'; 
+                 context.rect(canvas1.width*.8,110,236,33);
+                 context.stroke();
+                 var mobile=male-dead; if(mobile<0){mobile=0;}
+                 context.font='16px sans-serif'; 
+                 context.fillText('SWARM SIZE ' + '(M/F): ' + ' ' + mobile + ' / ' + female,canvas1.width*.8+22,132);
+          //Add blurred marker to canvas
+              if (swarm) {  
+                 context.shadowBlur=30;
+                 context.shadowColor='white';
+                 context.fillStyle='white';
+                 context.fillRect(marker_x+110, canvas.height-9, 150,10);
+                 context.shadowBlur=0;
+                 messg3();
+                  } 
+          //Add notice in midgespace   
+              if (panel) {
+                 context.fillStyle='rgba(128,128,128,0.3)'; 
+                 context.rect(canvas1.width*.77,700,330,33);
+                 context.stroke();
+                 context.font='16px sans-serif';
+                 context.fillText('CLICK ANYWHERE TO ADD A FEMALE',canvas1.width*.77+22,722);
+                }
+          //Do the fading
+                context.globalCompositeOperation = 'source-in';
+                context.fillStyle = 'rgba(128,128,128,0.85)';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+          //Set dot drawing style
+                context.globalCompositeOperation = 'lighter'; 
+                context.fillStyle = 'rgba(255,255,255,0.5)'; 
+               
+          //n-body code acceleration accumulation
+                 for (var i = 0; i<amount; i++) {             //i-loop covers all encounters, mating and non-mating  
+                        var a = particles[i];
+                 if (!sexType[i]){context.fillStyle = 'rgba(255,0,0,0.5)';}  //Make females red
+    
+                  for (var j = i + 1; j < amount; j++) {
+                        var b = particles[j];
+                        var vec = a.position.sub(b.position);
+                        var length = vec.length();
+                        
+                        
+                 //Distant encounters between i/j pairs       
+                    if (length >= min_prox) {    
+                             if (sexType[i]==sexType[j]) {  //Same sexType: inv-sq-law attraction (if selected by factor1)
+                             vec.idiv(Math.pow(length, 3) / factor1);
+                                  b.accel.iadd(vec);
+                                  a.accel.isub(vec); 
+                              }
+                              else
+                              {
+                              vec.idiv(Math.pow(length, 3) /(factor2*10)); //Opposite sexType: inv-sq-law attraction
+                                  b.accel.iadd(vec); 
+                                  a.accel.isub(vec); 
+                              }
+                        }
+                        else
+                        {
+                  //Close encounters between i/j pairs 
+                             if(sexType[i]!==sexType[j] && ages[i]!== true){   //Opposite sexType & un-expired is a mating encounter
+                                 if (canvas.height-b.position.y >= 200){       //If particle above swarm lower level, do mating   
+                                 vec2=new Vector(Math.floor(Math.random()*8000)-4000,(canvas.height-(a.position.y))/2); 
+                                 vec2.idiv(300); a.accel.iadd(vec2);b.accel.iadd(vec2);   
+                                 if(sexType[i]) {ages[i] += 5}                // Increase male's age after each mating   
+                                 }
+                               else
+                                {
+                               particles[i].vel.x=1;
+                               particles[j].vel.y=-1;      //Stop mating when below swarm lower level
+                               ages[j] +=40;               //Mating adds to female's age      
+                                }
+                              } 
+                                
+                           if(sexType[i]!==sexType[j] && ages[i]== true && canvas.height-b.position.y < 4){
+                                 ages[j]=true;}                 //No mating if one expired and other grounded
+                                       
+                           if(sexType[i]==sexType[j] && ages[i]!== true) {
+                                 ages[i] +=5;}                 //Same sex encounter. No mating but adds to age
+                           } 
+                        
+                        
+                  //Grounded female leaves the swarm for egg laying
+                     if (canvas.height-b.position.y < 4 && sexType[j]==false && ages[j]==true) {
+                             sexType.splice(j,1); particles.splice(j,1); ages.splice(j,1); amount--;
+                             male=sexType.filter(function(value){return value ==true;}).length;
+                             female=amount-male; messg2();
+                      if (swarm){context1.fillText('CLICK ON GOLD TO REMOVE', 30,canvas1.height/2+5);
+                        }  
+                     }    
+                
+         }    //End j-loop       
+                               
+      /*  Define vec1 to represent the linear attraction of a particle to the area above the swarm marker.
+          The x-component of vec1 is randomised over the range of particles, and its y-component is randomised over an 
+          arbitrary range of the marker's y-axis. These randomisations reflect differing enthusiasms of particles
+           both to join the swarm, and to fly directly to it. marker_const>1e5 is used to turn off this attraction */
+           
+            
+               // Add x-component attraction to the swarm marker, and randomize y-component over an arbitrary range
+                   if(swarm) {var vec1= new Vector(a.position.x-marker_x-100, Math.floor(Math.random()*300));   
+                        vec1.idiv(latest_marker*Math.random()*80)-40;   //Randomise the accel to the marker  
+                        a.accel.isub(vec1); 
+                     }
+                    if (cX !==0) {a.step(i);a.draw(context);}        
+                    
+                  
+                     //Has the particle's life in the swarm expired?  
+                   if(ages[i]>lifeSpan || ages[i]==true) {                   //Yes
+                          if(sexType) {
+                              if(particles[i].position.y>=canvas.height) {  //Grounded males stay as debris
+                              particles[i].vel.x=0;particles[i].vel.y=0;a.accel.x=0;a.accel.y=0; ages[i]=true;
+                              } 
+                              else
+                             {                                             //Ungrounded fall to ground
+                             particles[i].vel.x=0;particles[i].vel.y=1;
+                             }
+                         }
+                         else
+                         {
+                             if(particles[i].position.y>=canvas.height) {  //Grounded females disappear
+                             sexType.splice(j,1); particles.splice(j,1); ages.splice(j,1); amount--;
+                             male=sexType.filter(function(value){return value ==true;}).length;
+                             female=amount-male; messg2();
+                             } 
+                             else
+                            {                                             //Ungrounded fall to ground
+                            particles[i].vel.x=0;particles[i].vel.y=1;
+                            }
+                         }
+                   }                  
+            }  //End i-loop
+
+               dead = ages.filter(function(value){return value == true;}).length;  //Number in the debris 
+            
+      }     //End if-delta/interval loop
+    
+ }        //End drawandUpdate
+     
+       setupParticles(0,0);  //Entry point
+       
+    </script>
+   </head>
+</html>
