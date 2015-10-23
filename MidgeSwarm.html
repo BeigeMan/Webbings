@@ -792,7 +792,7 @@
                     if (cX !==0) {a.step(i);a.draw(context);}        
                     
                   
-                     //Has the particle's life in the swarm expired?  
+                     //Has the male's life in the swarm expired?  
                    if(ages[i]>lifeSpan || ages[i]==true) {                   //Yes
                           if(sexType) {
                               if(particles[i].position.y>=canvas.height) {  //Grounded males stay as debris
@@ -802,18 +802,6 @@
                              {                                             //Ungrounded fall to ground
                              particles[i].vel.x=0;particles[i].vel.y=1;
                              }
-                         }
-                         else
-                         {
-                             if(particles[i].position.y>=canvas.height) {  //Grounded females disappear
-                             sexType.splice(j,1); particles.splice(j,1); ages.splice(j,1); amount--;
-                             male=sexType.filter(function(value){return value ==true;}).length;
-                             female=amount-male; messg2();
-                             } 
-                             else
-                            {                                             //Ungrounded fall to ground
-                            particles[i].vel.x=0;particles[i].vel.y=1;
-                            }
                          }
                    }                  
             }  //End i-loop
