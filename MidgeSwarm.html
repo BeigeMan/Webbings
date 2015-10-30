@@ -11,7 +11,7 @@
         Your browser does not support Canvas</canvas>
         <canvas id = 'bar' height='30'></canvas>
         <canvas id = 'defbtn' width = '70' height = '30'></canvas>
-        <canvas id = 'settings' width = '450' height = '780'></canvas>
+        <canvas id = 'settings' width = '450'></canvas>
         <canvas id = 'setbtn' width = '70' height = '30'></canvas>
        </canvas>
        
@@ -51,9 +51,37 @@
       <input  autocomplete= 'off' type='range' id='slider9' name='slider9' min='1' max='60' value= '60'> 
       <input  autocomplete= 'off' type='range' id='slider9' name='slider9' min='1' max='60' value= '60' step='1' oninput='showValue(this.value,8)'> 
       <output name='output9' id='output9' for='slider9'>60</output> 
-
+      
+      <div class="divScroll">
+        
+      <p>Swarm-based mating of flying insects, such as midges, typically involves 
+            groups, predominantly of males, centred over some marker in the terrain. 
+            Swarming increases the chances of a successful encounter with 
+            patrolling females that are attracted by the swarm. The females enter the swarm briefly, mate in 
+            flight, and eventually drop from the swarm to lay eggs elsewhere, and then expire. During
+            this winged phase, the insects do not feed, so their lifetimes are limited by their internal resources.</p> 
+         
+         <p>This code gives a plausible illustration of these features using the basic 2D 
+            physics of interacting, identical particles. The male/female attraction is an
+            inverse-square law, reflecting the acoustic communication used in nature. 
+            We use a linear law for the attraction of particles to a swarm marker. Male/male  
+            attraction, which is believed not to be a big factor in swarming, is here 
+            turned off by default, but it can be added, also as an inv-sq-law. (In that case, beyond a critical 
+            transition, mob clustering of male particles occurs.)</p>
+        <p> Self-propulsion is accounted 
+            for by setting a minimum speed in the swarm; the maximum is adjustable. Ages are randomly set 
+            initially for individuals in the swarm, and are then accumulated from the number of flight maneuvers 
+            made: matings, take offs, and close encounters. The details are fixed but  
+            the maximum lifetime allowed all particles is adjustable. Sufficiently mated females drop from
+            the swarm and from the scene, as do egg layers in nature.  Likewise, expired females drop from the scene, 
+            while expired males collect as debris around the marker. </p>
+            
+        <p> The code is fully self-contained HTML5/CSS3 JS Canvas, compatible with up-to-date browsers that support rAF animation.
+            Chrome seems to work the best. Performance depends on the hardware.</p>
+                    
+    </div>
  </body>
-	 
+ 
 <style>
        html {
              height: 100%;
@@ -231,6 +259,20 @@
            left: 415px;
            color: #fff;
       }
+     .divScroll {
+	  position:absolute;
+          overflow-y:scroll;
+          height: 175px;
+          width: 412px;
+          top: 410px;
+          left: 50px;
+    }
+    p {
+         text-indent: 20px;
+         font-size: 14px;
+         font-family: sans-serif;
+         max-width: 380px;
+      }
       
 </style>
  
@@ -294,7 +336,8 @@
          
        function resizeCanvas() {
           midgespace.width = window.innerWidth-18;
-		  midgespace.height = window.innerHeight-60;
+	  midgespace.height = window.innerHeight-60;
+	  settings.height = window.innerHeight*.85;
           bar.width = window.innerWidth-180;
           drawStuff();  
          }
@@ -541,28 +584,7 @@
                   context3.fillText('MALE/MARKER linear law ATTRACTION',16,255);
                   context3.fillText('DISPLAY (fps)',160,312);
                   context3.fillText("MAX. PARTICLE LIFESPAN",84,282);
-                  context3.font='13px sans-serif';
-                  context3.fillText('  Swarm-based mating of flying insects, such as midges, typically invol-',15,350); 
-                  context3.fillText('ves groups, predominantly of males, centred over some marker in the ',15,370);
-                  context3.fillText('terrain. Swarming increases the chances of a successful encounter with ',15,390);
-                  context3.fillText('patrolling females attracted by the swarm. They enter it briefly, mate in',15,410); 
-                  context3.fillText('flight, and eventually drop from the swarm to lay eggs elsewhere. During',15,430); 
-                  context3.fillText("this phase, the insects' lifetimes are limited by their internal resources.",15,450); 
-                  context3.fillText('  This code gives a plausible illustration of these features using basic 2D',15,475);
-                  context3.fillText('physics of interacting, identical particles. The male/female attraction is an',15,495); 
-                  context3.fillText('inverse-square law, reflecting the acoustic communication used in nature.',15,515); 
-                  context3.fillText('We use a linear law for the attraction to a swarm marker. Male/male ',15,535); 
-                  context3.fillText('attraction, thought not to be a big factor in the swarm, is here turned',15,555); 
-                  context3.fillText('turned off by default, but can be added as an inv-sq-law. (Beyond a criti-',15,575); 
-                  context3.fillText('cal transition, mob clustering will then occur.) Self-propulsion is accounted',15,595); 
-                  context3.fillText('for by setting a minimum speed in the swarm; the maximum is adjustable.',15,615);
-                  context3.fillText('Aging is accumulated individually from the number of flight maneuvers',15,635);
-                  context3.fillText('made: matings, take offs, and close encounters. The details are fixed but',15,655); 
-                  context3.fillText('the maximum lifetime is adjustable. Mated or expired females drop from',15,675);
-                  context3.fillText('the swarm and from the scene; expired males collect as debris.',15,695);
-                  context3.fillText('  The code is fully self-contained HTML5/CSS3 JS, compatible with up-to-',15,720);
-                  context3.fillText('date browsers. Chrome works best. Performance depends on hardware.',15,740);
-                  context3.fillText('Toggle SETTINGS to hide this panel',110,770);  
+                  context3.fillText('Toggle SETTINGS to hide this panel',110,canvas.height*.9);  
                    }  
             }
              
@@ -704,10 +726,10 @@
           //Add notice in midgespace   
               if (panel) {
                  context.fillStyle='rgba(128,128,128,0.3)'; 
-                 context.rect(canvas1.width*.77,700,330,33);
+                 context.rect(canvas1.width*.77,canvas.height*.91,330,canvas.height*.048);
                  context.stroke();
                  context.font='16px sans-serif';
-                 context.fillText('CLICK ANYWHERE TO ADD A FEMALE',canvas1.width*.77+22,722);
+                 context.fillText('CLICK ANYWHERE TO ADD A FEMALE',canvas1.width*.77+22,canvas.height*.94);
                 }
           //Do the fading
                 context.globalCompositeOperation = 'source-in';
