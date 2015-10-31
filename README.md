@@ -25,6 +25,6 @@
   females drop from the swarm and disappear from the scene. Expired
   males collect as debris around the marker.
 
-  The code is fully self-contained HTML5/CSS3 JS, compatible with
-  up-to-date browsers. Chrome/Safari work best. Performance depends on the
+  The code is fully self-contained HTML5/CSS3 JS Canvas, and is compatible with
+  up-to-date browsers that support rAF animation. Chrome/Safari seem to work best. Performance depends on the
   hardware.
