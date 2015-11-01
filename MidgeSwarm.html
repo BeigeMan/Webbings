@@ -52,7 +52,7 @@
       <input  autocomplete= 'off' type='range' id='slider9' name='slider9' min='1' max='60' value= '60' step='1' oninput='showValue(this.value,8)'> 
       <output name='output9' id='output9' for='slider9'>60</output> 
       
-      <div class="divScroll">
+    <div class="divScroll">
         
       <p>Swarm-based mating of flying insects, such as midges, typically involves 
             groups, predominantly of males, centred over some marker in the terrain. 
@@ -75,11 +75,10 @@
             the maximum lifetime allowed all particles is adjustable. Sufficiently mated females drop from
             the swarm and from the scene, as do egg layers in nature.  Likewise, expired females drop from the scene, 
             while expired males collect as debris around the marker. </p>
-            
         <p> The code is fully self-contained HTML5/CSS3 JS Canvas, compatible with up-to-date browsers that support rAF animation.
             Chrome seems to work the best. Performance depends on the hardware.</p>
-      </div>
-      <p class='head'>ADJUSTABLE PARAMETERS</p>
+    </div>
+         <p class='head'>ADJUSTABLE PARAMETERS</p>
          <p class='lines  ex1'>INITIAL NUMBER OF PARTICLES</p>
          <p class='lines  ex2'>INITIAL % 'MALE' PARTICLES</p>
          <p class='lines  ex3'>PARTICLES' UPPER SPEED LIMIT</p>
@@ -128,7 +127,7 @@
             position: absolute;
             top: 5px;
             overflow: hidden;
-			left: 165px;
+        	left: 165px; 
        }
        #defbtn{
             margin: 0;
@@ -352,7 +351,7 @@
             var context = canvas.getContext('2d');
             var canvas1 = document.getElementById('bar');
             var context1 = canvas1.getContext('2d');
-			var canvas2 = document.getElementById('defbtn');
+     	var canvas2 = document.getElementById('defbtn');
             var context2 = canvas2.getContext('2d');
             var canvas3 = document.getElementById('settings');
             var context3 = canvas3.getContext('2d');
@@ -430,16 +429,16 @@
             canvas1.addEventListener('mouseover', doMouseOverBar, false);
             canvas1.addEventListener('mouseout', doMouseOutBar, false);
             
-			var canvas2 = document.getElementById('defbtn');
+  	var canvas2 = document.getElementById('defbtn');
             var context2 = canvas2.getContext('2d');
-			canvas2.addEventListener('mouseover', doMouseOverDefbtn, false);
+		canvas2.addEventListener('mouseover', doMouseOverDefbtn, false);
             canvas2.addEventListener('click', doDefBtnClick, false);
             canvas2.addEventListener('mouseout', doMouseOutDefbtn, false);
             
             var canvas3= document.getElementById('settings');
             var context3 = canvas3.getContext('2d');
 		
-			var canvas4 = document.getElementById('setbtn');
+		var canvas4 = document.getElementById('setbtn');
             var context4 = canvas4.getContext('2d');
             canvas4.addEventListener('mouseover', doMouseOverSetbtn, false);
             canvas4.addEventListener('click', doSetBtnClick, false);
