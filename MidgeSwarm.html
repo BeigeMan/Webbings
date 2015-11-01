@@ -78,9 +78,18 @@
             
         <p> The code is fully self-contained HTML5/CSS3 JS Canvas, compatible with up-to-date browsers that support rAF animation.
             Chrome seems to work the best. Performance depends on the hardware.</p>
-                    
-    </div>
- </body>
+      </div>
+      <p class='head'>ADJUSTABLE PARAMETERS</p>
+         <p class='lines  ex1'>INITIAL NUMBER OF PARTICLES</p>
+         <p class='lines  ex2'>INITIAL % 'MALE' PARTICLES</p>
+         <p class='lines  ex3'>PARTICLES' UPPER SPEED LIMIT</p>
+         <p class='lines  ex4'>MIN. PROXIMITY FOR MATING (px)</p>
+         <p class='lines  ex5'>MALE--MALE InvSqLaw ATTRACTION</p>
+         <p class='lines  ex6'>MALE--FEMALE InvSqLaw ATTRACTION</p>
+         <p class='lines  ex7'>MALE--MARKER linear law ATTRACTION</p>
+         <p class='lines  ex8'>MAX. PARTICLE LIFESPAN</p>
+         <p class='lines  ex9'>DISPLAY (fps)</p>
+   </body>
  
 <style>
        html {
@@ -273,7 +282,26 @@
          font-family: sans-serif;
          max-width: 380px;
       }
-      
+     .head{
+         position:absolute;
+         font-size: 16px;
+         color: #fff;
+         margin: 90px 100px 28px 110px;
+      }
+    .lines{
+         position:absolute;
+         font-size: 12px;
+         color: #fff;
+     }
+     .ex1{ margin: 132px 100px 28px 50px;}
+     .ex2{ margin: 162px 100px 28px 70px;}
+     .ex3{ margin: 192px 100px 28px 44px;}
+     .ex4{ margin: 224px 100px 28px 37px;}
+     .ex5{ margin: 254px 100px 28px 27px;}
+     .ex6{ margin: 284px 100px 28px 13px;}
+     .ex7{ margin: 314px 100px 28px 10px;}
+     .ex8{ margin: 344px 100px 28px 84px;}
+     .ex9{ margin: 374px 100px 28px 160px;} 
 </style>
  
    <script>
@@ -570,20 +598,7 @@
             
               if (midgespace.style.zIndex == '0') {
                   context3.fillStyle = 'rgba(0,0,0,1)';
-                  context3.rect(10,20,430,310);
-                  context3.stroke();
-                  context3.font='16px sans-serif';
-                  context3.fillText('ADJUSTABLE PARAMETERS',103,45); 
                   context3.font='12px sans-serif';
-                  context3.fillText('INITIAL NUMBER OF PARTICLES',50,73);
-                  context3.fillText("INITIAL % 'MALE' PARTICLES",70,103);
-                  context3.fillText('MIN. PROXIMITY FOR MATING (px)',37,163);
-                  context3.fillText('MALE/MALE InvSqLaw ATTRACTION',30,195);
-                  context3.fillText('MALE/FEMALE InvSqLaw ATTRACTION',15,225);
-                  context3.fillText("PARTICLES' UPPER SPEED LIMIT",44,133);
-                  context3.fillText('MALE/MARKER linear law ATTRACTION',16,255);
-                  context3.fillText('DISPLAY (fps)',160,312);
-                  context3.fillText("MAX. PARTICLE LIFESPAN",84,282);
                   context3.fillText('Toggle SETTINGS to hide this panel',110,canvas.height*.9);  
                    }  
             }
