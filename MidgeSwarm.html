@@ -309,39 +309,39 @@
                    var cases =[swarmMale,perMale,spdLimit,minProx,islFactor1,islFactor2,tgtConst,lifeTime,frameRate];
             
              // Swarm 
-                   var lifeSpan=2000;        //Maximum male lifespan
-                   var dead=0;               //Number of expired lifeSpans
-                   var swarm = false;        //Swarming? y/n
-                   var particles=[];         //Array: length=amount 
-                   var male=40, female=0;    //Initial numbers for sexType
-                   var amount = male+female; //Total number in the swarm     
-                   var marker_x = 700;       //x-pos of swarm marker in 'bar'
-                   var marker_const=1000;    //Reduce this to increase attraction to swarm marker
-                   var sexType =[];          //Boolean male=true
-                   var ages = [];            //Accumulated age of each particle
-                   var percent_male=100;     //Initial percentage of males in swarm
-                   var factor1=1;            //Initial inverse-square scaling factor male/male
-                   var factor2=10;            //Initial inverse-square scaling factor male/female
-                   var min_prox = 10;        //Range 4->40px. 
-                   var initial_speed = 20;   //Initial swarm speed
-                   var speed_toplimit = 4;   //Swarm speed top limit. 
-                   var speed_botlimit=3;     //Swarm speed bottom limit set to account for self propulsion
-                   var latest_marker=1000;   //Current inputted target_constant
-                   var vec2;                 //In-flight mating vector
+                   var lifeSpan=2000,        //Maximum male lifespan
+                       dead=0,               //Number of expired lifeSpans
+                       swarm = false,        //Swarming? y/n
+                       particles=[],         //Array: length=amount 
+                       male=40, female=0,    //Initial numbers for sexType
+                       amount = male+female, //Total number in the swarm     
+                       marker_x = 700,       //x-pos of swarm marker in 'bar'
+                       marker_const=1000,    //Reduce this to increase attraction to swarm marker
+                       sexType =[],          //Boolean male=true
+                       ages = [],            //Accumulated age of each particle
+                       percent_male=100,     //Initial percentage of males in swarm
+                       factor1=1,            //Initial inverse-square scaling factor male/male
+                       factor2=10,            //Initial inverse-square scaling factor male/female
+                       min_prox = 10,        //Range 4->40px. 
+                       initial_speed = 20,   //Initial swarm speed
+                       speed_toplimit = 4,   //Swarm speed top limit. 
+                       speed_botlimit=3,     //Swarm speed bottom limit set to account for self propulsion
+                       latest_marker=1000,   //Current inputted target_constant
+                       vec2;                 //In-flight mating vector
                    
            // Frame-rate        
-                   var fps = 60;             //Chosen rAF frame rate 
-                   var now;                  //Time now
-                   var then = Date.now();    //Time before
-                   var interval = 1000/fps;  //Time between each frame request
-                   var delta;                //Time elapsed since last loop
+                   var fps = 60,             //Chosen rAF frame rate 
+                       now,                  //Time now
+                       then = Date.now(),    //Time before
+                       interval = 1000/fps,  //Time between each frame request
+                       delta;                //Time elapsed since last loop
                    
           //Display
-                    var vWall = 80;           //Top and sides walls set this #px offscreen
-                    var wall_damp = 1;        //Wall damping coefficient. 1=elastic
-                    var x_last=0;             //Last x-cord of swarm marker
-                    var panel = false;        //Mouseover midgespace canvas
-                    var setts = false;        //Mouseover settings canvas
+                    var vWall = 80,           //Top and sides walls set this #px offscreen
+                        wall_damp = 1,        //Wall damping coefficient. 1=elastic
+                        x_last=0,             //Last x-cord of swarm marker
+                        panel = false,        //Mouseover midgespace canvas
+                        setts = false;        //Mouseover settings canvas
                     
                       
 // ---------------DYNAMIC SCREEN SIZE-----------------------------
