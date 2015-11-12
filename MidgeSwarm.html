@@ -633,10 +633,12 @@
            context1.fillStyle='rgb(0,0,0)';
             } 
             
-            /* To avoid intrusive edge effects at sides and top
-               of the canvas, we constrain the particles inside
-               elastic walls that are set a distance vWall px 
-               off-screen, except the bottom of the window. */
+            /**
+             * To avoid intrusive edge effects at sides and top
+             * of the canvas, we constrain the particles inside
+             * elastic walls that are set a distance vWall px 
+             * off-screen, except at the bottom of the window. 
+             */
                
          var Particle = function(canvas,cX,cY) {
              if (cX==0) {
@@ -814,10 +816,12 @@
                 
          }    //End j-loop       
                                
-      /*  Define vec1 to represent the linear attraction of a particle to the area above the swarm marker.
-          The x-component of vec1 is randomised over the range of particles, and its y-component is randomised over an 
-          arbitrary range of the marker's y-axis. These randomisations reflect differing enthusiasms of particles
-           both to join the swarm, and to fly directly to it. marker_const>1e5 is used to turn off this attraction */
+      /**
+       *  Define vec1 to represent the linear attraction of a particle to the area above the swarm marker.
+       *  The x-component of vec1 is randomised over the range of particles, and its y-component is randomised over an 
+       *  arbitrary range of the marker's y-axis. These randomisations reflect differing enthusiasms of particles
+       *  both to join the swarm, and to fly directly to it. marker_const>1e5 is used to turn off this attraction 
+       */
            
             
                // Add x-component attraction to the swarm marker, and randomize y-component over an arbitrary range
