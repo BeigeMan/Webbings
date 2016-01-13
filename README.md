@@ -26,5 +26,5 @@
   males collect as debris around the marker.
 
   The code is fully self-contained HTML5/CSS3 JS Canvas, and is compatible with
-  up-to-date browsers that support rAF animation. Chrome/Safari seem to work best. Performance depends on the
-  hardware.
+  up-to-date browsers that support rAF animation. 
+  View at: http://jsbin.com/vepeyo/edit?html,output
